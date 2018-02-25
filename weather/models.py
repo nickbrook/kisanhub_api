@@ -38,6 +38,9 @@ class WeatherMetricReading(models.Model):
     """
     An individual weather metric reading e.g rainfall in mm for Jan 1940
     """
+    class Meta:
+        ordering = ['year', 'month']
+
     source = models.ForeignKey(DataSource, on_delete=models.CASCADE)
     year = models.PositiveSmallIntegerField()
     month = models.PositiveSmallIntegerField()
