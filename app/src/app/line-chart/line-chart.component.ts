@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input, ElementRef, ViewChild } from '@angular/core';
 import {ApiService, TimestampValue} from "../api.service";
-import {Config, Data, Layout, ScatterData} from 'plotly.js';
+import { Layout, ScatterData} from 'plotly.js';
 import * as Plotly from 'plotly.js';
 import * as _ from 'lodash';
 
@@ -16,7 +16,6 @@ export class LineChartComponent implements OnChanges {
   @ViewChild('chart') chart_el: ElementRef;
 
   fetching: boolean;
-  results: TimestampValue[];
 
   constructor(private api: ApiService) { }
 

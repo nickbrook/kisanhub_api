@@ -18,7 +18,7 @@ export class ApiService {
 
   getTimeSeries(location: string, metric: string): Observable<TimestampValue[]> {
     return this.http
-      .get<TimestampValue[]>(`${this.baseUrl}/timeseries/${location}/${metric}/`)
+      .get<TimestampValue[]>(`${this.baseUrl}timeseries/${location}/${metric}/`)
             .pipe(
                 map(result => {
                   return _.map(result, (tsitem: any) => {

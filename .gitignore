@@ -2,5 +2,17 @@
 kisanhub.sqlite3
 kisanhub.sqlite3-journal
 *.pyc
-weather-app/node_modules
 
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+app/dist
+app/out-tsc
+
+# dependencies
+app/node_modules
+
+
+# misc
+app/.sass-cache
+app/typings
