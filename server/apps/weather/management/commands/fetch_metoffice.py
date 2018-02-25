@@ -3,15 +3,15 @@ from concurrent.futures import ThreadPoolExecutor
 import requests
 from django.core.management.base import BaseCommand
 
-from weather.models import WeatherMetric, Location, WeatherMetricReading, DataSource
+from apps.weather.models import WeatherMetric, Location, WeatherMetricReading, DataSource
 
-METRIC_TO_URL_KEY = {
-    'max temp': 'Tmax',
-    'min temp': 'Tmin',
-    'mean temp': 'Tmean',
-    'sunshine': 'Sunshine',
-    'rainfall': 'Rainfall',
-}
+METRICS = [
+    'Tmax',
+    'Tmin',
+    'Tmean',
+    'Sunshine',
+    'Rainfall'
+]
 
 LOCATIONS = [
     'UK', 'Scotland', 'England', 'Wales'
@@ -63,19 +63,19 @@ class Command(BaseCommand):
                 loc = Location.objects.create(name=name)
                 all_locs.add(loc)
 
-            all_metrics = set()
-            for metric_name in METRIC_TO_URL_KEY.keys():
-                m = WeatherMetric.objects.create(name=metric_name)
-                all_metrics.add(m)
+            all_metrics = []
+            for code in METRICS:
+                m = WeatherMetric.objects.create(code=code)
+                all_metrics.append(m)
 
             # create data sources
             for loc in all_locs:
-                for metric in all_metrics:
-                    DataSource.objects.create(metric=metric,
+                for metric_obj in all_metrics:
+                    DataSource.objects.create(metric=metric_obj,
                                               location=loc,
                                               url="https://www.metoffice.gov.uk/pub/data/weather/uk/climate/datasets/"
-                                                  "{metric_key}/date/{country}.txt".format(
-                                                  metric_key=METRIC_TO_URL_KEY[metric.name], country=loc.name))
+                                                  "{metric_code}/date/{country}.txt".format(
+                                                  metric_code=metric_obj.code, country=loc.name))
 
         # use threads, because life is too short
         with ThreadPoolExecutor() as executor:

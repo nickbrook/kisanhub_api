@@ -22,7 +22,7 @@ class WeatherMetric(models.Model):
     The weather metric e.g min temp, max temp. We could have placed all metrics in the
     same reading for a given month/year, but this is the most generic and extensible approach
     """
-    name = models.CharField(max_length=16)
+    code = models.CharField(max_length=16)
 
 
 class DataSource(models.Model):
