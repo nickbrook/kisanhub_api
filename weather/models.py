@@ -1,5 +1,13 @@
 from django.db import models
 
+#
+# Fully denormalised data structures in the Django Way
+#
+# Is this the best / most-efficient way to store this data? Depending on usage: probably not - if you spend most
+# of your time working on the data as a whole, then storing in more convenient data structures in MongoDB may
+# make more sense. Of course this particular dataset is so small that it's pretty much a moot point: you can hoover
+# the whole lot into RAM in ms.
+#
 
 class Location(models.Model):
     """
@@ -19,7 +27,7 @@ class WeatherMetric(models.Model):
 
 class DataSource(models.Model):
     """
-    Where does the data come from for a particular metric and location
+    Where does the data come from for a particular metric and location?
     """
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     metric = models.ForeignKey(WeatherMetric, on_delete=models.CASCADE)
