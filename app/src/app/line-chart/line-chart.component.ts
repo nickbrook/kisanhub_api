@@ -33,13 +33,13 @@ export class LineChartComponent implements OnChanges {
         const lineChartData = <ScatterData> {
             type: 'scatter',
             mode: 'lines',
-            name: 'Signal',
+            name: this.metric,
             x: _.map(data, 'date'),
             y: _.map(data, 'value'),
             line: { color: '#17BECF'}
         };
         const layout = <Layout> {
-            title: 'Signal vs Target',
+            title: this.metric+' '+this.location+" timeseries",
             xaxis: {
                 autorange: true,
                 rangeselector: {buttons: [
