@@ -6,7 +6,7 @@
     "module": "es2015",
     "types": [ "plotly.js"],
     "paths": {
-      "plotly.js": ["../node_modules/plotly.js/dist/plotly-finance.js"]
+      "plotly.js": ["../node_modules/plotly.js/dist/plotly.js"]
     }
   },
   "exclude": [

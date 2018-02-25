@@ -5,13 +5,11 @@ import * as Plotly from 'plotly.js';
 import * as _ from 'lodash';
 
 @Component({
-  selector: 'app-line-chart',
-  templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.scss']
+  selector: 'app-temperature-charts',
+  templateUrl: './temperature-charts.component.html',
+  styleUrls: ['./temperature-charts.component.scss']
 })
-export class LineChartComponent implements OnChanges {
-
-  @Input() metric: string;
+export class TemperatureChartsComponent implements OnChanges {
   @Input() location: string;
   @ViewChild('chart') chart_el: ElementRef;
 
@@ -24,21 +22,25 @@ export class LineChartComponent implements OnChanges {
     this.redrawChart();
   }
 
+
   private redrawChart() {
     this.fetching = true;
-    this.api.getTimeSeries(this.location, this.metric).subscribe(
+    // TODO fetch all temp metrics in parallel
+    const metric = "Tmean";
+    this.api.getTimeSeries(this.location, metric).subscribe(
       data => {
         this.fetching = false;
         const lineChartData = <ScatterData> {
             type: 'scatter',
             mode: 'lines',
-            name: this.metric,
+            name: metric,
             x: _.map(data, 'date'),
             y: _.map(data, 'value'),
             line: { color: '#17BECF'}
         };
+        // TODO refactor this layout into a service?
         const layout = <Layout> {
-            title: this.metric+' '+this.location+" timeseries",
+            title: metric+' '+this.location+" timeseries",
             xaxis: {
                 autorange: true,
                 rangeselector: {buttons: [

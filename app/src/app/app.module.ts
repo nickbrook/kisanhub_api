@@ -6,12 +6,14 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import {ApiService} from "./api.service";
+import { TemperatureChartsComponent } from './temperature-charts/temperature-charts.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LineChartComponent
+    LineChartComponent,
+    TemperatureChartsComponent
   ],
   imports: [
     BrowserModule,
