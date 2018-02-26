@@ -14,7 +14,10 @@ METRICS = [
 ]
 
 LOCATIONS = [
-    'UK', 'Scotland', 'England', 'Wales'
+    'UK',
+    'Scotland',
+    'England',
+    'Wales'
 ]
 
 
@@ -38,8 +41,8 @@ def import_data_source(ds: DataSource):
         year, data_by_month = year_data
         to_add = []
         for month_number, value in enumerate(data_by_month):
-            if not WeatherMetricReading.objects.filter(source=ds, year=year, month=month_number):
-                to_add.append(WeatherMetricReading(source=ds, year=year, month=month_number, value=value))
+            if not WeatherMetricReading.objects.filter(source=ds, year=year, month=month_number+1):
+                to_add.append(WeatherMetricReading(source=ds, year=year, month=month_number+1, value=value))
         WeatherMetricReading.objects.bulk_create(to_add)
 
 
@@ -78,7 +81,7 @@ class Command(BaseCommand):
                                                   metric_code=metric_obj.code, country=loc.name))
 
         # use threads, because life is too short
-        with ThreadPoolExecutor() as executor:
+        with ThreadPoolExecutor(4) as executor:
             # update all data sources
             for ds in DataSource.objects.all():
                 executor.submit(import_data_source, ds)

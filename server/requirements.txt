@@ -2,6 +2,7 @@ certifi==2018.1.18
 chardet==3.0.4
 decorator==4.2.1
 Django==2.0.2
+django-cors-headers==2.1.0
 django-extensions==2.0.0
 djangorestframework==3.7.7
 idna==2.6
@@ -11,6 +12,7 @@ jedi==0.11.1
 parso==0.1.1
 pexpect==4.4.0
 pickleshare==0.7.4
+pkg-resources==0.0.0
 prompt-toolkit==1.0.15
 ptyprocess==0.5.2
 Pygments==2.2.0

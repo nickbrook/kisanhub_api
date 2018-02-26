@@ -29,7 +29,7 @@ export class LineChartComponent implements OnChanges {
     this.api.getTimeSeries(this.location, this.metric).subscribe(
       data => {
         this.fetching = false;
-        const lineChartData = <ScatterData> {
+        let lineChartData = <ScatterData> {
             type: 'scatter',
             mode: 'lines',
             name: this.metric,
@@ -37,10 +37,11 @@ export class LineChartComponent implements OnChanges {
             y: _.map(data, 'value'),
             line: { color: '#17BECF'}
         };
-        const layout = <Layout> {
+        let layout = <Layout> {
             title: this.metric+' '+this.location+" timeseries",
             xaxis: {
-                autorange: true,
+                // autorange: true,
+                range: ['1990-01-01', '2018-01-01'],
                 rangeselector: {buttons: [
                         {
                             count: 1,
@@ -56,7 +57,6 @@ export class LineChartComponent implements OnChanges {
                         },
                         {step: 'all'}
                     ]},
-                rangeslider: { range: ['1990-01-01', '2018-01-01']},
                 type: 'date'
             }
         };
