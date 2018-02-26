@@ -26,6 +26,10 @@ pip install -r requirements.txt
 ./manage.py migrate
 ```
 
+### Side-note: timeseries storage
+
+While I've gone normalisation-crazy here it's actually not the best data structure for timeseries storage in a DB. In fact this is actually an area where MongoDB does come into it's own, as a noSQL DB could just store the timeseries as an array of (date,value) pairs and then just load the whole lot at once. In noSQL-land this would be pretty much instantaneous to both read and write. 
+
 ### Database population
 
 `./manage.py fetch_metoffice`
