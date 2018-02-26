@@ -1,5 +1,11 @@
 # Kisanhub Interview Question
 
+## Introduction
+
+This is mainly a demonstration app of Angular5 plotly.js app working in conjunction with a DjangoRestFramework backend. In the real world of course we would first need to work out what questions we need to ask of the data, which will determine what visualisations and levels of interactivity are required. 
+
+As such I'm not really sure what the question is asking for in part 3 - what's interesting to me may be completely irrelevant to an actual customer. Is the customer really interested in a overall trend of max temperature over the last 100 years, or do they just care about the probability of certain rainfall and sunshine conditions during a particular date range? 
+
 The solution is split into two parts: the Django server, which is really just a DjangoRestFramework API, and the app, which is a pure Angular5 app. In production you would probably just serve the app via a CDN e.g CloudFront - they're just static assets and a single index.html.
 
 ## Server

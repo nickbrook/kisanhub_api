@@ -80,8 +80,13 @@ class Command(BaseCommand):
                                                   "{metric_code}/date/{country}.txt".format(
                                                   metric_code=metric_obj.code, country=loc.name))
 
-        # use threads, because life is too short
-        with ThreadPoolExecutor(4) as executor:
-            # update all data sources
-            for ds in DataSource.objects.all():
-                executor.submit(import_data_source, ds)
+        for ds in DataSource.objects.all():
+            import_data_source(ds)
+
+        # I'm not entirely convinced that sqlite3 is thread-safe
+
+        # # use threads, because life is too short
+        # with ThreadPoolExecutor(4) as executor:
+        #     # update all data sources
+        #     for ds in DataSource.objects.all():
+        #         executor.submit(import_data_source, ds)
